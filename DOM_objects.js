@@ -175,11 +175,11 @@ function update_dom_texts(){
             y_slider.value(y_slider.elt.min)
         }
         else if(y_slider.value() == y_slider.elt.max){
-            x_slider.value(x_slider.value() + 0.1 * precision_slider.value())
+            x_slider.value(x_slider.value() + 1 * precision_slider.value())
             y_slider.value(y_slider.elt.min)
         }
         else
-            y_slider.value(y_slider.value() + 0.1 * precision_slider.value())
+            y_slider.value(y_slider.value() + 1 * precision_slider.value())
     }
     let h_val = h_slider.value()
     let x_val = x_slider.value()

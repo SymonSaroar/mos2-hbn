@@ -7,7 +7,7 @@
 function hbn_hex(n, side_length, shape){
     this.n = n
     this.side_length = side_length
-    this.substrate_size = 3 * n * n + 25
+    this.substrate_size = 3 * n * n + 30
     let w = sqrt(3) * side_length
     let h = 2 * side_length
 

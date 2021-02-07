@@ -19,7 +19,7 @@ let sigma = [
 /*N */[0, 2.958, 3.367, 0, 0]
 ]
 
-let distance_between_S = 3.01
+
 let HBN_bilayer_interlayer_distance = 3.34
 let HBN_layers = 2
 function summation_part() {
