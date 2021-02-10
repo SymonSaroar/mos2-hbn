@@ -16,7 +16,7 @@ function create_elements(){
     n_slider_text = createP("<b>n = </b>")
     n_slider_text.position(text_padding, height + 10)
     n_slider_text.style('color', 'green')
-    n_slider = createSlider(1, 16, 1, 1)
+    n_slider = createSlider(1, 16, 2, 1)
     n_slider.style('width', '200px')
     n_slider.position(silder_padding, height + seperator)
     n_slider_value_text = createP("" + n_slider.value())
@@ -110,7 +110,15 @@ function lateral_y(){
     y_slider.position(silder_padding, height + 7 * seperator)
 
 }
-
+function checkbox(){
+    show_checkbox = createCheckbox('Show', true)
+    show_checkbox.changed(changeAnimaton)
+    show_checkbox.position(width + 20, height - 20)
+}
+function changeAnimaton(){
+    if(show_checkbox.checked()) showAnim = true
+    else if(!show_checkbox.checked()) showAnim = false
+}
 function plotter_texts(){
     axis_x_texts = [0, 60, 120]
     axis_y_texts = [min_sum_val - 100, min_sum_val + 200]
@@ -120,6 +128,7 @@ function plotter_texts(){
         
     }
 }
+
 function take_n_input(){
     if(input_field != null) input_field.remove()
     input_field = createInput("" + n_slider.value())

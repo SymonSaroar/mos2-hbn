@@ -3,7 +3,7 @@ let distance_between_S = 3.01
 let mos_bond_length = Math.sqrt(2.42 * 2.42 - distance_between_S * distance_between_S / 4)
 let bn_bond_length = 1.45
 // let HBN_bilayer_interlayer_distance = 3.34
-let multiplier = 4
+let multiplier = 1
 let tx_03 = [0, 1, -1]
 let ty_03 = [-2, 1, 1]
 
@@ -17,6 +17,7 @@ let plotCanvas
 let n_pos = [0, 3, 3, 4, 3, 3, 4, 4, 3, 3, 4, 4, 3, 3, 4, 4, 3, 3, 4, 4]
 let W, H
 let cur_internal_energy = 0, cur_theta = 0
+let showAnim = true
 function setup() {
 	createCanvas(600, 600);
 	W = width
@@ -38,7 +39,7 @@ function setup() {
 
     // Substrate_Size = 3 * n * n 
     // just to make the work flow.. like MoS2
-    ahbn = new hbn_hex(30, multiplier * bn_bond_length, 'hex') // Substrate size = n -> n x n points
+    ahbn = new hbn_hex(100, multiplier * bn_bond_length, 'hex') // Substrate size = n -> n x n points
     // On which atom? H or N
 
     internal_energy()
@@ -47,6 +48,7 @@ function setup() {
 	precision_controller()
 	lateral_x()
 	lateral_y()
+	checkbox()
 }
 
 function draw() {
@@ -80,8 +82,10 @@ function draw() {
 	background(255);
 	translate(width / 2, height / 2)
 
-	ahbn.show()
-	amos2.show()
+	if(showAnim){
+		ahbn.show()
+		amos2.show()
+	}
 	// amos2.drawShape()
 }
 

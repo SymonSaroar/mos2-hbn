@@ -17,17 +17,17 @@ function mos2_hex(n, side_length, shape){
 
     this.atoms = []
     
-    let to_generate = 3 * n * n + 50
-    if(n == 1) to_generate = 6 + 20
+    this.substrate_size = 6 * n
+    if(n == 1) this.substrate_size = 6 + 20
     let max_x = -Infinity
     let max_y = -Infinity
 
     let min_x = +Infinity
     let min_y = +Infinity
 
-    for(let i = 0; i < to_generate; i++){
+    for(let i = 0; i < (this.substrate_size); i++){
         if(i % 3 == 2) continue
-        for(let j = 0; j < to_generate; j++){
+        for(let j = 0; j < (this.substrate_size); j++){
             if( (i % 6 == 0 || i % 6 == 4) && j % 2 == 0 ){
                 if(i % 6 == 0){
                     temp_postype = [
@@ -78,11 +78,9 @@ function mos2_hex(n, side_length, shape){
     }
     
     // Take a beautiful Hexagoanal shape
-    let grup = floor(to_generate / 3 / 2)
-    let atm = grup * to_generate
-    atm -= to_generate / 2 / 2
-    atm = floor(atm)
+    let atm = (2 * n - 1) * floor(this.substrate_size / 2) + floor(this.substrate_size / 4)
     // console.log(atm)
+    
     let from = [tempAtoms[atm].x - this.dx, tempAtoms[atm].y + this.dy]
     
     let radius = (1 + 2 * (this.n - 1)) * this.dx + this.dx * 0.2
@@ -241,8 +239,11 @@ function mos2_hex(n, side_length, shape){
             }
             break;
         default:
+            this.atoms = tempAtoms
             break;
     }
+
+    // tempAtoms = []
 
     // Translate evrything to its center (of Gravity)
     for(i in this.atoms){
@@ -299,6 +300,7 @@ function mos2_hex(n, side_length, shape){
             // console.log(this.atoms[i].x, this.atoms[i].y)
             this.atoms[i].show(this.side_length)
         }
+        
     }
     
 }

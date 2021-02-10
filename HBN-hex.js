@@ -7,7 +7,7 @@
 function hbn_hex(n, side_length, shape){
     this.n = n
     this.side_length = side_length
-    this.substrate_size = 3 * n * n + 30
+    this.substrate_size = 6 * n
     let w = sqrt(3) * side_length
     let h = 2 * side_length
 
@@ -44,7 +44,8 @@ function hbn_hex(n, side_length, shape){
 
 
                 // i % 6 = 0, 3    -> Nitrogen
-                tempAtoms.push(new molecule(i%6 == 0? 3 : 4, j * this.dx, i * this.dy, temp_postype, side_length))
+                // tempAtoms.push(new molecule(i%6 == 0? 3 : 4, j * this.dx, i * this.dy, temp_postype, side_length))
+                tempAtoms.push(new molecule(i%6 == 0? 3 : 4, j * this.dx, i * this.dy, [], side_length))
             }
             else if( (i % 6 == 1 || i % 6 == 3) && j % 2 == 1 ){
                 if(i % 6 == 3){
@@ -63,7 +64,9 @@ function hbn_hex(n, side_length, shape){
                 }
 
                 // i % 6 = 1, 4    -> Boron
-                tempAtoms.push(new molecule(i%6 == 1? 4 : 3, j * this.dx, i * this.dy, temp_postype, side_length))
+                // tempAtoms.push(new molecule(i%6 == 1? 4 : 3, j * this.dx, i * this.dy, temp_postype, side_length))
+
+                tempAtoms.push(new molecule(i%6 == 1? 4 : 3, j * this.dx, i * this.dy, [], side_length))
             }
 
             // max_x = max(max_x, j * this.dx)
@@ -74,10 +77,7 @@ function hbn_hex(n, side_length, shape){
         }
     }
 
-    let grup = floor(this.substrate_size / 3 / 2)
-    let atm = grup * this.substrate_size
-    atm -= this.substrate_size / 2 / 2
-    atm = floor(atm)
+    let atm = (2 * n - 1) * (this.substrate_size / 2) + floor(this.substrate_size / 4)
     // console.log(atm)
     let from = [tempAtoms[atm].x - this.dx, tempAtoms[atm].y + this.dy]
 
@@ -241,7 +241,7 @@ function hbn_hex(n, side_length, shape){
         default:
             break;
     }
-
+    tempAtoms = []
 
     // Translate evrything to its center (of Gravity)
     this.trans_center = function(){
