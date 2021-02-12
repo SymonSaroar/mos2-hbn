@@ -16,7 +16,7 @@ function create_elements(){
     n_slider_text = createP("<b>n = </b>")
     n_slider_text.position(text_padding, height + 10)
     n_slider_text.style('color', 'green')
-    n_slider = createSlider(1, 16, 2, 1)
+    n_slider = createSlider(1, 16, 15, 1)
     n_slider.style('width', '200px')
     n_slider.position(silder_padding, height + seperator)
     n_slider_value_text = createP("" + n_slider.value())
@@ -25,7 +25,7 @@ function create_elements(){
     n_slider_value_text.mouseOver(take_n_input)
 
     // h slider
-    h_slider = createSlider(0, 10, 1, 1e-5)
+    h_slider = createSlider(0, 10, 4.8, 1e-5)
     h_slider_text = createP("<b>h (Inter-layer Distance) = </b>")
     h_slider.position(silder_padding, height + seperator * 2)
     h_slider_text.position(text_padding, height + 10 + seperator)
@@ -94,7 +94,7 @@ function precision_controller(){
     precision_slider_value_text.mouseOver(take_precition_input)
 }
 function lateral_x(){
-    x_slider = createSlider(-3, 3, 0, 0.1)
+    x_slider = createSlider(-2, 2, -2, 0.1)
     x_slider.style('width', '200px')
     x_slider.position(silder_padding, height + 6 * seperator)
 
@@ -105,7 +105,7 @@ function lateral_x(){
 
 }
 function lateral_y(){
-    y_slider = createSlider(-3, 3, 0, 0.1)
+    y_slider = createSlider(-2, 2, -2, 0.1)
     y_slider.style('width', '200px')
     y_slider.position(silder_padding, height + 7 * seperator)
 

@@ -6,3 +6,5 @@ Originally aimed towards finding most stable interlayer distance and stacking an
 * Plot theta - Energy graph by pressing on the play button beside the theta silder
 
 * all incremental precision is controlled by precision controller
+
+# Currently Default n = 15, h = 100 (Very High CPU usage)

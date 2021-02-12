@@ -3,7 +3,7 @@ let distance_between_S = 3.01
 let mos_bond_length = Math.sqrt(2.42 * 2.42 - distance_between_S * distance_between_S / 4)
 let bn_bond_length = 1.45
 // let HBN_bilayer_interlayer_distance = 3.34
-let multiplier = 1
+let multiplier = 10
 let tx_03 = [0, 1, -1]
 let ty_03 = [-2, 1, 1]
 
