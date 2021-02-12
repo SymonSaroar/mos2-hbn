@@ -1,7 +1,8 @@
 # mos2 on hbn
-MoS2 growth on HBN simulation ...
+Simulation of MoS2 growth on HBN
+Originally aimed towards finding most stable interlayer distance and stacking angle
 
-[x] Find minimum interlayer distance
-[x] Plot theta - Energy graph by pressing on the play button beside the theta silder
+* Find minimum interlayer distance
+* Plot theta - Energy graph by pressing on the play button beside the theta silder
 
-[x] all incremental precision is controlled by precision controller
+* all incremental precision is controlled by precision controller
