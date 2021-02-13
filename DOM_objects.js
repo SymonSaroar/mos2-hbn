@@ -16,7 +16,7 @@ function create_elements(){
     n_slider_text = createP("<b>n = </b>")
     n_slider_text.position(text_padding, height + 10)
     n_slider_text.style('color', 'green')
-    n_slider = createSlider(1, 16, 15, 1)
+    n_slider = createSlider(1, 16, 12, 1)
     n_slider.style('width', '200px')
     n_slider.position(silder_padding, height + seperator)
     n_slider_value_text = createP("" + n_slider.value())
