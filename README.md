@@ -14,8 +14,10 @@ B 2700, N 2700 per layer
 Mo 432, S 864
 ```
 
-# Side length | Number of atoms
-> Side Length = n * 2 * bond_length
+# Side length | Number of atom
+```
+Side Length = n * 2 * bond_length
+```
 ### MoS2
 > 1.895 Ang. -> lateral distance
 
