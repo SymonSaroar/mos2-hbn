@@ -4,7 +4,7 @@ let bn_bond_length = 1.45
 let mos_distance = 2.42
 let mos_bond_length = Math.sqrt(mos_distance * mos_distance - distance_between_S * distance_between_S / 4)
 // let HBN_bilayer_interlayer_distance = 3.34
-let multiplier = 5
+let multiplier = 6
 let tx_03 = [0, 1, -1]
 let ty_03 = [-2, 1, 1]
 
@@ -40,7 +40,7 @@ function setup() {
 
     // Substrate_Size = 3 * n * n 
     // just to make the work flow.. like MoS2
-    ahbn = new hbn_hex(30, multiplier * bn_bond_length, 'hex') // Substrate size = n -> n x n points
+    ahbn = new hbn_hex(20, multiplier * bn_bond_length, 'hex') // Substrate size = n -> n x n points
     // On which atom? H or N
 
     internal_energy()
@@ -50,6 +50,7 @@ function setup() {
 	lateral_x()
 	lateral_y()
 	checkbox()
+	one_time_button()
 }
 
 function draw() {

@@ -16,7 +16,7 @@ function create_elements(){
     n_slider_text = createP("<b>n = </b>")
     n_slider_text.position(text_padding, height + 10)
     n_slider_text.style('color', 'green')
-    n_slider = createSlider(1, 16, 12, 1)
+    n_slider = createSlider(1, 16, 2, 1)
     n_slider.style('width', '200px')
     n_slider.position(silder_padding, height + seperator)
     n_slider_value_text = createP("" + n_slider.value())
@@ -94,7 +94,7 @@ function precision_controller(){
     precision_slider_value_text.mouseOver(take_precition_input)
 }
 function lateral_x(){
-    x_slider = createSlider(-2, 2, -2, 0.1)
+    x_slider = createSlider(-2, 2, -2, 1)
     x_slider.style('width', '200px')
     x_slider.position(silder_padding, height + 6 * seperator)
 
@@ -105,15 +105,32 @@ function lateral_x(){
 
 }
 function lateral_y(){
-    y_slider = createSlider(-2, 2, -2, 0.1)
+    y_slider = createSlider(-2, 2, -2, 1)
     y_slider.style('width', '200px')
     y_slider.position(silder_padding, height + 7 * seperator)
 
 }
+function one_time_button(){
+    make_circle_button = createButton('HBN circle toggle', 'one')
+    make_circle_button.position(width + 40, height - 20)
+    make_circle_button.mousePressed(hbn_circle)
+}
+
+
+
 function checkbox(){
     show_checkbox = createCheckbox('Show', true)
     show_checkbox.changed(changeAnimaton)
     show_checkbox.position(width + 20, height - 20)
+}
+
+function hbn_circle(){
+    ahbn.make_circle(16)
+    make_circle_button.mousePressed(reset_hbn)
+}
+function reset_hbn(){
+    ahbn.reset()
+    make_circle_button.mousePressed(hbn_circle)
 }
 function changeAnimaton(){
     if(show_checkbox.checked()) showAnim = true
@@ -172,6 +189,34 @@ function take_precition_input(){
 }
 
 function update_dom_texts(){
+    let h_val = h_slider.value()
+    let x_val = x_slider.value()
+    let y_val = y_slider.value()
+    let sum_val = summation_part()
+    let theta_val = theta_slider.value()
+
+    cur_internal_energy = sum_val
+    cur_theta = theta_val
+    
+    internal_energy_text.html("Internal Energy = " + sum_val)
+    if(sum_val <= min_sum_val){
+        min_sum_val = sum_val
+        min_sum_h = h_val
+        min_sum_theta = theta_val
+        min_sum_x = x_val
+        min_sum_y = y_val
+        minimum_internal_energy_text.style('font-weight', 'normal')
+        minimum_internal_energy_text.style('color', 'red')
+    }
+    else{
+        minimum_internal_energy_text.style('font-weight', 'bold')
+        minimum_internal_energy_text.style('color', 'magenta')
+    }
+    if(min_sum_h == 0) minimum_internal_energy_text.html("Undefined")
+    else minimum_internal_energy_text.html(`Minimum = (${min_sum_h}, ${min_sum_theta}, [${min_sum_x}, ${min_sum_y}]) -> ${min_sum_val}`)
+
+
+    // Update If automated
     if(auto_trac_on)
         h_slider.value(h_slider.value() + 0.0001 * precision_slider.value() * 100)
     if(auto_rotate_on)
@@ -190,35 +235,11 @@ function update_dom_texts(){
         else
             y_slider.value(y_slider.value() + 1 * precision_slider.value())
     }
-    let h_val = h_slider.value()
-    let x_val = x_slider.value()
-    let y_val = y_slider.value()
-    let sum_val = summation_part()
-    let theta_val = theta_slider.value()
 
-    cur_internal_energy = sum_val
-    cur_theta = theta_val
     n_slider_value_text.html("" + n_slider.value())
     h_slider_value_text.html("" + h_slider.value())
     theta_slider_value_text.html("" + theta_slider.value())
     precision_slider_value_text.html("" + precision_slider.value())
-
-    internal_energy_text.html("Internal Energy = " + sum_val)
-    if(sum_val <= min_sum_val){
-        min_sum_val = sum_val
-        min_sum_h = h_val
-        min_sum_theta = theta_val
-        min_sum_x = x_val
-        min_sum_y = y_val
-        minimum_internal_energy_text.style('font-weight', 'normal')
-        minimum_internal_energy_text.style('color', 'red')
-    }
-    else{
-        minimum_internal_energy_text.style('font-weight', 'bold')
-        minimum_internal_energy_text.style('color', 'magenta')
-    }
-    if(min_sum_h == 0) minimum_internal_energy_text.html("Undefined")
-    else minimum_internal_energy_text.html(`Minimum = (${min_sum_h}, ${min_sum_theta}, [${min_sum_x}, ${min_sum_y}]) -> ${min_sum_val}`)
 
 }
 

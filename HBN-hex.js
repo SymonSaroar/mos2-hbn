@@ -15,6 +15,7 @@ function hbn_hex(n, side_length, shape){
     this.dy = 0.25 * h
 
     let tempAtoms = []
+    let hexatoms = []
     this.atoms = []
 
     let max_x = -Infinity
@@ -201,7 +202,7 @@ function hbn_hex(n, side_length, shape){
                 // }
                 // this.atoms.push(tempAtoms[i])
                 if(checkInsidePolygon(this.poly, tempAtoms[i], true)){
-                    this.atoms.push(tempAtoms[i])
+                    hexatoms.push(tempAtoms[i])
                 }
             }
             break;
@@ -233,7 +234,7 @@ function hbn_hex(n, side_length, shape){
                 if(checkInsidePolygon(this.poly, tempAtoms[i], false)){
                     // console.log("i " + i)
                     // console.log(i, tempAtoms[i])
-                    this.atoms.push(tempAtoms[i])
+                    hexatoms.push(tempAtoms[i])
                     // console.log(this.atoms)
                 }
             }
@@ -242,7 +243,9 @@ function hbn_hex(n, side_length, shape){
             break;
     }
     tempAtoms = []
-
+    for (i in hexatoms)
+        this.atoms.push(hexatoms[i])
+    
     // Translate evrything to its center (of Gravity)
     this.trans_center = function(){
         for(i in this.atoms){
@@ -264,6 +267,23 @@ function hbn_hex(n, side_length, shape){
         this.center = [from[0] + a * this.dx , from[1] + b * this.dy]
         this.trans_center()
     }
+    this.make_circle = function(r){
+        r = r * this.dx
+        let id_array = []
+        for(i in this.atoms){
+            if(this.atoms[i].x * this.atoms[i].x + this.atoms[i].y * this.atoms[i].y > r * r)
+                id_array.push(i)
+        }
+        for(let id = 0; id < id_array.length; id++){
+            this.atoms.splice(id_array[id] - id, 1)
+        }
+    }
+    this.reset = function(){
+        this.atoms = []
+        for(i in hexatoms)
+            this.atoms.push(hexatoms[i])
+    }
+
     this.show = function(){
         for(i in this.atoms){
             if(this.atoms[i].x >= -(W / 2.0) && 

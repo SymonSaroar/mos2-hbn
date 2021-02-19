@@ -28,7 +28,7 @@ function summation_part() {
     let ext = [0, 0]
     for (i in amos2.atoms) {
         if (amos2.atoms[i].type == 2) iter = 2, ext = [1, -1]
-        else iter = 1
+        else iter = 1, ext = [0, 0]
         while (iter--) {
             // Multilayer-HBN
             for (let layer = 1; layer <= HBN_layers; layer++) {
