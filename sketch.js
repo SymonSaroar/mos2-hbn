@@ -4,7 +4,7 @@ let bn_bond_length = 1.45
 let mos_distance = 2.42
 let mos_bond_length = Math.sqrt(mos_distance * mos_distance - distance_between_S * distance_between_S / 4)
 // let HBN_bilayer_interlayer_distance = 3.34
-let multiplier = 6
+let multiplier = 15
 let tx_03 = [0, 1, -1]
 let ty_03 = [-2, 1, 1]
 
@@ -19,6 +19,7 @@ let n_pos = [0, 3, 3, 4, 3, 3, 4, 4, 3, 3, 4, 4, 3, 3, 4, 4, 3, 3, 4, 4]
 let W, H
 let cur_internal_energy = 0, cur_theta = 0
 let showAnim = true
+let gb_anchor = [0,0]
 function setup() {
 	createCanvas(600, 600);
 	W = width
@@ -54,7 +55,7 @@ function setup() {
 }
 
 function draw() {
-  
+
 	if(old_value != n_slider.value()){
 		amos2 = new mos2_hex(n_slider.value(), multiplier * mos_bond_length, 'hex')
 		old_value = n_slider.value()
@@ -76,7 +77,7 @@ function draw() {
 	ahbn.re_center(x_slider.value(), y_slider.value())
 	
 	if(old_theta_value != theta_slider.value()){
-		amos2.rotate_with(theta_slider.value())
+		amos2.rotate_with(theta_slider.value(), gb_anchor)
 		old_theta_value = theta_slider.value()
 	}
 
@@ -88,6 +89,9 @@ function draw() {
 		ahbn.show()
 		amos2.show()
 	}
+	fill(0,0,0)
+
 	// amos2.drawShape()
+	circle(amos2.atoms[0])
 }
 

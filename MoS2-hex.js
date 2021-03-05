@@ -266,32 +266,33 @@ function mos2_hex(n, side_length, shape){
     }
 
     // console.log(this.atoms)
-    this.rotate = function(angle){
+    this.rotate = function(angle, pt = [0, 0]){
         this.rotated += angle
+
         let s = sin(angle)
         let c = cos(angle)
         let newx, newy
         for(i in this.atoms){
-            newx = this.atoms[i].x * c - this.atoms[i].y * s
-            newy = this.atoms[i].x * s + this.atoms[i].y * c
-            this.atoms[i].x = newx
-            this.atoms[i].y = newy 
+            newx = (this.atoms[i].x - pt[0]) * c - (this.atoms[i].y - pt[1]) * s
+            newy = (this.atoms[i].x - pt[0]) * s + (this.atoms[i].y - pt[1]) * c
+            this.atoms[i].x = newx + pt[0]
+            this.atoms[i].y = newy + pt[1]
             for(j in this.atoms[i].neighbours){
-                newx = this.atoms[i].neighbours[j][0] * c - this.atoms[i].neighbours[j][1] * s
-                newy = this.atoms[i].neighbours[j][0] * s + this.atoms[i].neighbours[j][1] * c
-                this.atoms[i].neighbours[j][0] = newx
-                this.atoms[i].neighbours[j][1] = newy
+                newx = (this.atoms[i].neighbours[j][0] - pt[0]) * c - (this.atoms[i].neighbours[j][1] - pt[1]) * s
+                newy = (this.atoms[i].neighbours[j][0] - pt[0]) * s + (this.atoms[i].neighbours[j][1] - pt[1]) * c
+                this.atoms[i].neighbours[j][0] = newx + pt[0]
+                this.atoms[i].neighbours[j][1] = newy + pt[1]
             }
         }
     }
 
-    this.unrotate = function(){
-        this.rotate(-this.rotated)
+    this.unrotate = function(pt){
+        this.rotate(-this.rotated, pt)
     }
 
-    this.rotate_with = function(angle){
-        this.unrotate()
-        this.rotate(angle)
+    this.rotate_with = function(angle, pt){
+        this.unrotate(pt)
+        this.rotate(angle, pt)
     }
 
     this.show = function(){
