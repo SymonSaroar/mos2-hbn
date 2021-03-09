@@ -41,7 +41,7 @@ function setup() {
 
     // Substrate_Size = 3 * n * n 
     // just to make the work flow.. like MoS2
-    ahbn = new hbn_hex(20, multiplier * bn_bond_length, 'hex') // Substrate size = n -> n x n points
+    ahbn = new hbn_hex(10, multiplier * bn_bond_length, 'hex') // Substrate size = n -> n x n points
     // On which atom? H or N
 
     internal_energy()

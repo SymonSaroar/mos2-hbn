@@ -94,7 +94,7 @@ function precision_controller(){
     precision_slider_value_text.mouseOver(take_precition_input)
 }
 function lateral_x(){
-    x_slider = createSlider(-35, 35, -2, 1)
+    x_slider = createSlider(-20, 20, -2, 1)
     x_slider.style('width', '200px')
     x_slider.position(silder_padding, height + 6 * seperator)
 
@@ -105,7 +105,7 @@ function lateral_x(){
 
 }
 function lateral_y(){
-    y_slider = createSlider(-52, 52, -2, 1)
+    y_slider = createSlider(-30, 30, -2, 1)
     y_slider.style('width', '200px')
     y_slider.position(silder_padding, height + 7 * seperator)
 
