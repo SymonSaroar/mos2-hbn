@@ -3,9 +3,9 @@ let plotSketch = function(p){
     let maximum = -Infinity
     let data = []
     p.setup = function(){
-        plotCanvas = p.createCanvas(400, 200)
+        plotCanvas = p.createCanvas(600, 200)
         plotCanvas.position(silder_padding, H + seperator * 8, 'fixed')
-        fx = (_) => map(_, 0, 120, 0, p.width)
+        fx = (_) => map(_, -60, 60, 0, p.width)
         fy = (_) => {
 			if(_ > maximum + 100)
 				return p.height

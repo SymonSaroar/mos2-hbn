@@ -67,7 +67,7 @@ function stacking_angle(){
     theta_slider_text.position(text_padding, height + 10 + seperator * 4)
     theta_slider_text.style('color', 'green')
     
-    theta_slider = createSlider(0, 120, 0, 0.01)
+    theta_slider = createSlider(-360, 360, 0, 0.01)
     theta_slider.position(silder_padding, height + 5*seperator)
     theta_slider.style('width', '200px')
     theta_slider_value_text = createP("" + theta_slider.value())
@@ -79,6 +79,10 @@ function stacking_angle(){
     auto_rotate_button.style('width', '20px')
     auto_rotate_button.mousePressed(rotate_with_precision)
     auto_rotate_button.position(silder_padding - 25, height + seperator * 5)
+
+    neg_rotate = createCheckbox("CC", false)
+    neg_rotate.changed(counter_clockwise_rotation)
+    neg_rotate.position(silder_padding - 75, height + seperator * 5)
 }
 
 function precision_controller(){
@@ -94,7 +98,7 @@ function precision_controller(){
     precision_slider_value_text.mouseOver(take_precition_input)
 }
 function lateral_x(){
-    x_slider = createSlider(-20, 20, -2, 1)
+    x_slider = createSlider(-10, 10, -2, 1)
     x_slider.style('width', '200px')
     x_slider.position(silder_padding, height + 6 * seperator)
 
@@ -105,7 +109,7 @@ function lateral_x(){
 
 }
 function lateral_y(){
-    y_slider = createSlider(-30, 30, -2, 1)
+    y_slider = createSlider(-10, 10, -2, 1)
     y_slider.style('width', '200px')
     y_slider.position(silder_padding, height + 7 * seperator)
 
@@ -135,6 +139,10 @@ function reset_hbn(){
 function changeAnimaton(){
     if(show_checkbox.checked()) showAnim = true
     else if(!show_checkbox.checked()) showAnim = false
+}
+function counter_clockwise_rotation(){
+    if(neg_rotate.checked()) theta_inc = -1
+    else if(!neg_rotate.checked()) theta_inc = +1
 }
 function plotter_texts(){
     axis_x_texts = [0, 60, 120]
@@ -220,7 +228,7 @@ function update_dom_texts(){
     if(auto_trac_on)
         h_slider.value(h_slider.value() + 0.0001 * precision_slider.value() * 100)
     if(auto_rotate_on)
-        theta_slider.value(theta_slider.value() + 0.01 * precision_slider.value() * 10)
+        theta_slider.value(theta_slider.value() + theta_inc * 0.01 * precision_slider.value() * 10)
     
     if(auto_lateral_on){
         if(x_slider.value() == x_slider.elt.max && y_slider.value() == y_slider.elt.max){

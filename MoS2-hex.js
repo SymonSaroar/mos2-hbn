@@ -238,6 +238,7 @@ function mos2_hex(n, side_length, shape){
                 }
             }
             break;
+        
         default:
             this.atoms = tempAtoms
             break;
@@ -267,8 +268,10 @@ function mos2_hex(n, side_length, shape){
 
     // console.log(this.atoms)
     this.rotate = function(angle, pt = [0, 0]){
+
         this.rotated += angle
 
+        angle = -angle
         let s = sin(angle)
         let c = cos(angle)
         let newx, newy

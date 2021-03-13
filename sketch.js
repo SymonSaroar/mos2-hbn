@@ -19,6 +19,7 @@ let n_pos = [0, 3, 3, 4, 3, 3, 4, 4, 3, 3, 4, 4, 3, 3, 4, 4, 3, 3, 4, 4]
 let W, H
 let cur_internal_energy = 0, cur_theta = 0
 let showAnim = true
+let theta_inc = 1
 let gb_anchor = [0,0]
 function setup() {
 	createCanvas(600, 600);
@@ -41,7 +42,7 @@ function setup() {
 
     // Substrate_Size = 3 * n * n 
     // just to make the work flow.. like MoS2
-    ahbn = new hbn_hex(10, multiplier * bn_bond_length, 'hex') // Substrate size = n -> n x n points
+    ahbn = new hbn_hex(20, multiplier * bn_bond_length, 'hex') // Substrate size = n -> n x n points
     // On which atom? H or N
 
     internal_energy()

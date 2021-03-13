@@ -20,35 +20,60 @@ let sigma = [
 ]
 
 
+let mos2_atom_types = [1, 2];
+let hbn_atom_types = [3, 4]
 let HBN_bilayer_interlayer_distance = 3.34
 let HBN_layers = 2
+let mos2_layers = 2
+let mos2_bilayer_interlayer_distance = 3
+let mos2_atom_type
+let hbn_atom_type
 function summation_part() {
     let internalEnergy = 0
     let iter = 0
     let ext = [0, 0]
-    for (i in amos2.atoms) {
-        if (amos2.atoms[i].type == 2) iter = 2, ext = [1, -1]
-        else iter = 1, ext = [0, 0]
-        while (iter--) {
-            // Multilayer-HBN
-            for (let layer = 1; layer <= HBN_layers; layer++) {
-                for (j in ahbn.atoms) {
-                    // console.log(distance(amos2.atoms[i], ahbn.atoms[j]))
-                    // console.log(sigma[amos2.atoms[i].type][ahbn.atoms[j].type], distance(amos2.atoms[i], ahbn.atoms[j], ext[iter]))
-                    internalEnergy += 4 * epsilon[amos2.atoms[i].type][ahbn.atoms[j].type] * (
-                        pow(sigma[amos2.atoms[i].type][ahbn.atoms[j].type] / distance(
-                                                                                        amos2.atoms[i],
-                                                                                        ahbn.atoms[j],
-                                                                                        ext[iter],
-                                                                                        layer),
-                            12) -
-                        pow(sigma[amos2.atoms[i].type][ahbn.atoms[j].type] / distance(
-                                                                                        amos2.atoms[i],
-                                                                                        ahbn.atoms[j],
-                                                                                        ext[iter],
-                                                                                        layer),
-                            6)
-                    )
+    for(let mos2_layer = 1; mos2_layer <= mos2_layers; mos2_layer++){
+        for (i in amos2.atoms) {
+            // AB stacking - different type for different layer
+            if(mos2_layer & 1){
+                if (amos2.atoms[i].type == mos2_atom_types[1]) iter = 2, ext = [1, -1], mos2_atom_type = mos2_atom_types[1]
+                else iter = 1, ext = [0, 0], mos2_atom_type = mos2_atom_types[0]
+            }
+            else{
+                if (amos2.atoms[i].type == mos2_atom_types[1]) iter = 1, ext = [0, 0], mos2_atom_type = mos2_atom_types[0]
+                else iter = 2, ext = [1, -1], mos2_atom_type = mos2_atom_types[1]
+            }
+            while (iter--) {
+                // Multilayer-HBN
+                for (let layer = 1; layer <= HBN_layers; layer++) {
+                    for (j in ahbn.atoms) {
+                        // console.log(distance(amos2.atoms[i], ahbn.atoms[j]))
+                        // console.log(sigma[amos2.atoms[i].type][ahbn.atoms[j].type], distance(amos2.atoms[i], ahbn.atoms[j], ext[iter]))
+                        // AA Stacking - same type for both layer
+                        if(layer & 1){
+                            if(ahbn.atoms[j].type == hbn_atom_types[0]) hbn_atom_type = hbn_atom_types[0]
+                            else hbn_atom_type = hbn_atom_types[1]
+                        }
+                        else{
+                            if(ahbn.atoms[j].type == hbn_atom_types[0]) hbn_atom_type = hbn_atom_types[0]
+                            else hbn_atom_type = hbn_atom_types[1]
+                        }
+
+                        internalEnergy += 4 * epsilon[mos2_atom_type][hbn_atom_type] * (
+                            pow(sigma[mos2_atom_type][hbn_atom_type] / distance(
+                                                                                            amos2.atoms[i],
+                                                                                            ahbn.atoms[j],
+                                                                                            ext[iter],
+                                                                                            layer),
+                                12) -
+                            pow(sigma[mos2_atom_type][hbn_atom_type] / distance(
+                                                                                            amos2.atoms[i],
+                                                                                            ahbn.atoms[j],
+                                                                                            ext[iter],
+                                                                                            layer),
+                                6)
+                        )
+                    }
                 }
             }
         }
