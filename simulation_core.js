@@ -24,7 +24,7 @@ let mos2_atom_types = [1, 2];
 let hbn_atom_types = [3, 4]
 let HBN_bilayer_interlayer_distance = 3.34
 let HBN_layers = 2
-let mos2_layers = 2
+let mos2_layers = 1
 let mos2_bilayer_interlayer_distance = 3
 let mos2_atom_type
 let hbn_atom_type
